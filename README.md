@@ -1,99 +1,131 @@
-# 🌱 AI-Based Crop Disease Detection (Deep Learning)
+# 🌱 AI-Based Crop Disease Detection (Deep Learning + Streamlit)
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
-![Deep Learning](https://img.shields.io/badge/DeepLearning-MobileNetV2-orange)
-![Framework](https://img.shields.io/badge/Framework-TensorFlow-red)
-![Domain](https://img.shields.io/badge/Domain-Computer%20Vision-green)
+![Deep Learning](https://img.shields.io/badge/Model-MobileNetV2-orange)
+![Transfer Learning](https://img.shields.io/badge/Technique-Transfer%20Learning-red)
+![Frontend](https://img.shields.io/badge/UI-Streamlit-green)
+[![Live App](https://img.shields.io/badge/Live%20App-Streamlit-green?logo=streamlit)](https://cropdetectionsystem.streamlit.app)
 
-A **deep learning-based image classification system** that detects tomato leaf diseases using **transfer learning with MobileNetV2**.
+---
 
-The model classifies tomato leaf images into:
+## 🚀 Live Deployment
 
-- 🍂 Tomato Early Blight  
-- 🍂 Tomato Late Blight  
-- 🌿 Healthy Tomato Leaf  
+🔗 **Streamlit App:**  
+https://cropdetectionsystem.streamlit.app  
 
-Final Test Accuracy: **~96.6%**
+> 🚀 Achieved ~96–97% test accuracy using Transfer Learning (MobileNetV2).
+
+---
+
+## 📸 App Preview
+
+![App Screenshot](app_preview.png)
+
+---
+
+## 📌 Project Overview
+
+An end-to-end deep learning system that detects tomato leaf diseases from images.
+
+This project uses **Transfer Learning with MobileNetV2**, fine-tuned on a tomato leaf dataset to classify images into:
+
+- Early Blight  
+- Late Blight  
+- Healthy  
+
+The trained model is deployed publicly using **Streamlit Cloud**, allowing users to upload leaf images and receive real-time predictions with confidence scores.
+
+This project demonstrates:
+
+- CNN-based image classification  
+- Transfer learning  
+- Model fine-tuning  
+- Performance evaluation  
+- Web app deployment  
+- Cloud hosting  
 
 ---
 
 ## 🚀 Features
 
-- 🧠 Transfer learning using MobileNetV2 (ImageNet pretrained)
-- 🔄 Data augmentation for improved generalization
-- 🎯 Fine-tuning of last 20 layers
-- 📊 Confusion matrix & classification report
-- 📈 Training & validation performance curves
-- 🖼️ Single image prediction demo
-- 📦 Saved trained model (`.keras` format)
-- 🧩 Clean and modular project structure
+- 🧠 Transfer Learning using MobileNetV2
+- 🎯 Fine-tuning for improved accuracy
+- 📊 Confusion Matrix & Classification Report
+- 📈 Training & Validation accuracy visualization
+- 🌐 Interactive Streamlit web app
+- 📦 Model saved in native `.keras` format
+- ☁️ Public deployment on Streamlit Cloud
+- 📊 Class probability visualization
 
 ---
 
-## 🧠 How the Model Works
+## 🧠 System Architecture
 
 ### 1️⃣ Data Preparation
-- Dataset: PlantVillage (Tomato subset)
-- Split into:
-  - Train
-  - Validation
-  - Test
-- Images resized to **224x224**
-- Pixel normalization (Rescaling 1/255)
+
+- Image resizing to 224x224  
+- Batch size: 32  
+- Train / Validation / Test split  
+- Sparse categorical labels  
 
 ---
 
-### 2️⃣ Transfer Learning
+### 2️⃣ Model Architecture
 
-- Base Model: **MobileNetV2**
-- Pretrained on ImageNet
-- Initial layers frozen during first phase
-- Custom classification head added:
-  - GlobalAveragePooling
-  - Dense (ReLU)
-  - Dropout
-  - Softmax (3 classes)
+- Base Model: **MobileNetV2 (ImageNet pretrained)**
+- Custom Top Layers:
+  - GlobalAveragePooling2D  
+  - Dense (ReLU)  
+  - Dropout  
+  - Dense (Softmax – 3 classes)
 
 ---
 
 ### 3️⃣ Fine-Tuning Strategy
 
-- Last 20 layers unfrozen
-- Lower learning rate (`1e-5`)
-- Additional 5 epochs for better feature adaptation
-
-This improves generalization without overfitting.
-
----
-
-## 📊 Model Performance
-
-| Metric | Value |
-|--------|--------|
-| Test Accuracy | ~96.6% |
-| Macro F1-score | ~0.96 |
-| Weighted F1-score | ~0.97 |
+- Unfroze last 20 layers of MobileNetV2  
+- Reduced learning rate to 1e-5  
+- Trained additional epochs  
+- Improved validation stability  
 
 ---
 
-### 🔍 Confusion Matrix Insights
+## 📊 Final Model Performance
 
-- ✅ Perfect recall for healthy leaves
-- 🔄 Minor confusion between Early & Late blight (visually similar diseases)
-- 📉 No major class imbalance bias
-- 📈 Strong precision and recall across all classes
+### ✅ Test Accuracy:
+**~96–97%**
 
-Model shows stable convergence and minimal overfitting.
+### 📈 Classification Report:
+
+| Class              | Precision | Recall | F1-Score |
+|--------------------|-----------|--------|----------|
+| Early Blight       | 0.95      | 0.92   | 0.93     |
+| Late Blight        | 0.97      | 0.96   | 0.97     |
+| Healthy            | 0.97      | 1.00   | 0.98     |
+
+The model shows strong balance across all classes.
 
 ---
 
-## 📁 Project Structure
+## 💡 Real-World Impact
+
+- Enables early disease detection  
+- Reduces potential crop loss  
+- Assists farmers with AI-based diagnosis  
+- Demonstrates practical agricultural AI deployment  
+
+This system balances **accuracy, efficiency, and deployability**.
+
+---
+
+## 🏗️ Project Structure
 
 ```text
 AI-Based-Crop-Disease-Detection/
 │
+├── app.py                          # Streamlit web application
 ├── model/
-│   └── tomato_disease_model.keras
+│   └── tomato_disease_model.keras  # Trained deep learning model
 │
 ├── notebooks/
 │   ├── 01_Model_Training_and_Evaluation.ipynb
@@ -112,111 +144,53 @@ AI-Based-Crop-Disease-Detection/
 
 ## ▶️ How to Run Locally
 
-### 1️⃣ Clone the repository
+### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/AI-Based-Crop-Disease-Detection.git
+git clone https://github.com/nandithburla/AI-Based-Crop-Disease-Detection.git
 cd AI-Based-Crop-Disease-Detection
 ```
 
----
-
-### 2️⃣ Install dependencies
+### 2️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+### 3️⃣ Run Streamlit App
 
-### 3️⃣ Train the Model
-
-Open:
-
-```
-notebooks/01_Model_Training_and_Evaluation.ipynb
+```bash
+streamlit run app.py
 ```
 
-Run all cells to:
+Then open:
 
-- Train model
-- Apply fine-tuning
-- Evaluate on test dataset
-- Generate confusion matrix
-- Save final model
+👉 http://localhost:8501
 
 ---
 
-### 4️⃣ Run Single Image Prediction
+## 🔍 Prediction Workflow
 
-Open:
-
-```
-notebooks/02_Predict_Single_Image.ipynb
-```
-
-Modify the image path if needed and run to see predictions.
-
----
-
-## 📊 Evaluation Metrics Included
-
-- Training Accuracy Curve
-- Validation Accuracy Curve
-- Training & Validation Loss Curve
-- Confusion Matrix
-- Precision, Recall, F1-score
-- Final Test Accuracy
-
-This ensures model performance is evaluated beyond raw accuracy.
+1. User uploads image  
+2. Image resized to 224x224  
+3. Pixel values normalized  
+4. Processed by MobileNetV2 model  
+5. Softmax layer generates probabilities  
+6. App displays:
+   - Predicted class  
+   - Confidence score  
+   - Probability breakdown  
 
 ---
 
-## 📦 Dataset Used
+## 🚧 Future Improvements
 
-- **PlantVillage Dataset**
-- Tomato leaf images
-- 3 Classes:
-  - Early Blight
-  - Late Blight
-  - Healthy
-
-Dataset used offline for reproducibility.
-
-*Note: Dataset not included in repository due to large size.*
-
----
-
-## 🚧 Deployment Notes
-
-- Model saved in modern `.keras` format
-- Can be deployed using:
-  - Streamlit
-  - Flask / FastAPI
-  - TensorFlow Lite (mobile devices)
-- For real-world deployment, training on field images is recommended.
-
----
-
-## 📌 Future Improvements
-
-- Deploy as a Streamlit web application
-- Convert model to TensorFlow Lite for mobile usage
-- Expand to multiple crop types
-- Add Grad-CAM for model explainability
-- Train on real farm images for robustness
-
----
-
-## 🛠️ Tech Stack
-
-- Python 3.10
-- TensorFlow / Keras
-- MobileNetV2
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
+- Grad-CAM heatmap visualization  
+- Multi-crop disease support  
+- Prediction history tracking  
+- REST API version (FastAPI)  
+- Docker containerization  
+- Model versioning system  
 
 ---
 
